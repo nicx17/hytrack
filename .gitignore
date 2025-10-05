@@ -1,0 +1,4 @@
+/.env
+/.venv
+/active_ids.json
+/tracker.log

@@ -1,0 +1,4 @@
+# requirements.txt
+beautifulsoup4
+requests
+python-dotenv
