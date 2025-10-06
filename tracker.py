@@ -67,8 +67,6 @@ def fetch_waybills_from_email():
         mail = imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT)
         mail.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         mail.select("INBOX")
-
-        # MODIFICATION: Only search for UNSEEN (unread) emails for efficiency
         status, messages = mail.search(None, 'UNSEEN')
         if status != "OK":
             logging.error("Failed to search for emails.")
@@ -103,7 +101,6 @@ def fetch_waybills_from_email():
             for wb in found:
                 waybills.add(wb)
             
-            # MODIFICATION: Mark email as read ('\Seen') after processing
             mail.store(num, '+FLAGS', '\\Seen')
 
         mail.logout()
@@ -157,7 +154,6 @@ def send_html_email(subject, html_content):
 
 def build_html_message(waybill, event):
     """Builds the HTML content for the notification email."""
-    # This function remains the same, but it's good practice to keep it separate.
     return f"""
     <html>
     <head>
@@ -222,7 +218,7 @@ def build_html_message(waybill, event):
         </div>
     </body>
     </html>
-    """ # HTML content is unchanged from your original script
+    """ 
 
 # ===================== MAIN EXECUTION =====================
 
@@ -272,6 +268,5 @@ def main():
     save_active_ids(active_ids)
     logging.info("--- Script run finished ---")
 
-# MODIFICATION: Standard Python entry point
 if __name__ == "__main__":
     main()
