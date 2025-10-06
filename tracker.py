@@ -217,7 +217,7 @@ def build_html_message(waybill, event):
             </a>
 
             <div class="footer">
-                Thank you for using BlueTrack 📬
+                Thank you for using HyTrack
             </div>
         </div>
     </body>
@@ -256,8 +256,8 @@ def main():
             active_ids[waybill]["delivered"] = True
             active_ids[waybill]["last_event"] = event # Save the final delivery event
             # Optional: Send one final "Delivered" notification
-            # html_msg = build_html_message(waybill, event)
-            # send_html_email(f"✅ DELIVERED: Waybill {waybill}", html_msg)
+            html_msg = build_html_message(waybill, event)
+            send_html_email(f"✅ DELIVERED: Waybill {waybill}", html_msg)
             continue
         
         if event != info.get("last_event"):
